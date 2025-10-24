@@ -36,6 +36,7 @@ try {
   if (e instanceof z.ZodError) {
     console.log('Invalid env var')
     console.error(JSON.stringify(e.flatten().fieldErrors, null, 2))
+    // console.error(JSON.stringify(z.treeifyError(e), null, 2))
 
     e.issues.forEach((err) => {
       const path = err.path.join('.')
