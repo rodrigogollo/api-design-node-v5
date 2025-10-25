@@ -1,3 +1,4 @@
+import { hashPassword } from '../utils/passwords.ts';
 import { db } from './connection.ts'
 import { users, habits, entries, tags, habitTags } from './schema.ts'
 
@@ -13,10 +14,13 @@ const seed = async () => {
     await db.delete(tags)
 
     console.log('creating demo users...')
+    const password = 'password'
+    const hashedPassword = await hashPassword(password)
+
     const [demoUser] = await db.insert(users).values({
       email: 'demo@app.com',
       username: 'demo',
-      password: 'password',
+      password: hashedPassword,
       firstName: 'demo',
       lastName: 'person',
     })
@@ -61,7 +65,7 @@ const seed = async () => {
     console.log(`user credentials`)
     console.log(`email: ${demoUser.email}`)
     console.log(`username: ${demoUser.username}`)
-    console.log(`password: ${demoUser.password}`)
+    console.log(`password: ${password}`)
   } catch (e) {
     console.error('Seed failed', e);
     process.exit(1)

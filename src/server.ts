@@ -6,6 +6,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { isTest } from '../env.ts';
+import { errorHandler } from './middleware/errorHandler.ts';
 
 const app = express();
 
@@ -18,6 +19,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev', {
   skip: () => isTest(),
 }))
+
+app.use(errorHandler)
+
+// could do something like this
+// app.use((_, _, next) => {
+//   next(new APIError('validation error', 'ValidationError', 400)
+// })
 
 app.get('/health', (req, res) => {
   res
@@ -57,6 +65,7 @@ app.get('/health', (req, res) => {
 //     })
 //   }
 // })
+//
 
 app.use('/api/auth', authRoutes)
 app.use('/api/habits', habitRoutes)
