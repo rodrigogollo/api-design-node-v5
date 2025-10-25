@@ -79,8 +79,6 @@ export const updateHabit = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const id = req.params.id;
     const { tagIds, ...updates } = req.body;
-    console.log('body', req.body)
-    console.log('update: ', updates, tagIds, '\n\n\n')
 
     const result = await db.transaction(async (tx) => {
       const [updatedHabit] = await tx

@@ -8,6 +8,13 @@
       "when": 1761397718340,
       "tag": "0000_simple_absorbing_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1761433447088,
+      "tag": "0001_sparkling_lizard",
+      "breakpoints": true
     }
   ]
 }
